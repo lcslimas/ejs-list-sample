@@ -1,0 +1,77 @@
+<script>
+  const updateItems = () => {
+    const quantity = getQuantity();
+    if (quantity > 100) {
+      alert("Quantity should be less than 100.");
+      return;
+    }
+
+    fetch("/components/items?quantity=" + quantity, { method: "get" })
+      .then((response) => response.text())
+      .then((data) => (document.getElementById("section").innerHTML = data))
+      .catch(({ error }) => alert(error));
+  };
+
+  const getQuantity = () => {
+    return document.getElementById("quantity").value >= 0 ? document.getElementById("quantity").value : 0;
+  };
+</script>
+<style>
+  aside {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 100vh;
+    justify-content: center;
+    background-color: var(--secondary-color);
+  }
+  .quantity-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  #quantity {
+    height: 30px;
+  }
+
+  .quantity-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  @media screen and (max-width: 768px) {
+    aside {
+      width: 100vw;
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .quantity-box {
+      background-color: var(--primary-color);
+      width: 200px;
+      height: 100vh;
+    }
+  }
+</style>
+<aside>
+  <div class="quantity-box">
+    <div class="quantity-title">Quantity</div>
+    <input
+      type="number"
+      id="quantity"
+      onkeyup="updateItems()"
+      onchange="updateItems()"
+      max="100"
+      placeholder="Type here"
+    />
+  </div>
+</aside>

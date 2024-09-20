@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example</title>
+    <style>
+      :root {
+        --primary-color: #afabab;
+        --secondary-color: #cfcdcd;
+        --light-color: #e9e7e7;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+      }
+
+      main {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #back {
+        background-color: var(--secondary-color);
+        color: black;
+        padding: 10px 20px;
+        margin: 20px;
+        border-radius: 5px;
+        height: 50px;
+      }
+
+      @media screen and (max-width: 768px) {
+        main {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="main">
+      <%- include('./templates/aside-quantity/index.ejs') %> 
+      <%- include('./templates/section-items/index.ejs') %>
+    </main>
+  </body>
+</html>
